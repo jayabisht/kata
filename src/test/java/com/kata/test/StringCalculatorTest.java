@@ -33,5 +33,13 @@ class StringCalculatorTest {
 		assertEquals(27,calculator.Add("1,8,10,1,7"));
 		assertEquals(176,calculator.Add("1,8,10,1,7,10,40,99"));
 	}
+	
+	@Test
+	void testNewLinesWithNumbers() {
+		StringCalculator calculator = new StringCalculator();
+		assertEquals(19,calculator.Add("1\n8,10"));
+		assertEquals(27,calculator.Add("1,8,10\n1,7"));
+		assertEquals(176,calculator.Add("1,8\n10,1,7\n10,40\n99"));
+	}
 
 }
