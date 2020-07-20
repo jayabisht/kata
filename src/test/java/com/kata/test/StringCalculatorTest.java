@@ -19,5 +19,11 @@ class StringCalculatorTest {
 		StringCalculator calculator = new StringCalculator();
 		assertEquals(10,calculator.Add("10"));
 	}
+	
+	@Test
+	void testTwoNumbers() {
+		StringCalculator calculator = new StringCalculator();
+		assertEquals(3,calculator.Add("1,2"));
+	}
 
 }
