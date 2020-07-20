@@ -9,10 +9,12 @@ public class StringCalculator {
 			return Integer.valueOf(numbers);
 		else {
 			String[] numberArray = numbers.split(",");
-			int num1 = Integer.valueOf(numberArray[0]);
-			int num2 = Integer.valueOf(numberArray[1]);
+			int sum = 0;
+			for(int i =0;i<numberArray.length;i++) {
+				sum += Integer.valueOf(numberArray[i]);
+			}
 			
-			return num1+num2;
+			return sum;
 		}
 	}
 
