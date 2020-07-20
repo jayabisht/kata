@@ -5,7 +5,7 @@ public class StringCalculator {
 	public Integer Add(String numbers) {
 		if(numbers.equals(""))
 			return 0;
-		else if(!numbers.contains(","))
+		else if(!numbers.contains(",") && !numbers.contains("\n"))
 			return Integer.valueOf(numbers);
 		else {
 			String[] numberArray = numbers.split(",|\n");
