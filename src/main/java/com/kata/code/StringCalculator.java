@@ -5,7 +5,7 @@ import java.util.regex.Pattern;
 
 public class StringCalculator {
 
-	public Integer Add(String numbers) {
+	public Integer Add(String numbers) throws Exception {
 		
 		if(numbers.equals(""))
 			return 0;
@@ -15,12 +15,17 @@ public class StringCalculator {
 		int sum = 0;
 		if(defaultDelimiter == null) {
 		
-			if(!numbers.contains(",") && !numbers.contains("\n"))
-				return Integer.valueOf(numbers);
+			if(!numbers.contains(",") && !numbers.contains("\n")) {
+				int parsedNumber = Integer.valueOf(numbers);
+				checkForNegativeNumber(parsedNumber);
+				return parsedNumber;
+			}
 			
 			String[] numberArray = numbers.split(",|\n");
 			for(int i =0;i<numberArray.length;i++) {
-				sum += Integer.valueOf(numberArray[i]);
+				int parsedNumber = Integer.valueOf(numberArray[i]);
+				checkForNegativeNumber(parsedNumber);
+				sum += parsedNumber;
 			}
 		}
 		else {
@@ -29,12 +34,17 @@ public class StringCalculator {
 			if(exactNumber.equals(""))
 				return 0;
 			
-			if(!exactNumber.contains(defaultDelimiter))
-				return Integer.valueOf(exactNumber);
+			if(!exactNumber.contains(defaultDelimiter)) {
+				int parsedNumber = Integer.valueOf(exactNumber);
+				checkForNegativeNumber(parsedNumber);
+				return parsedNumber;
+			}
 			
 			String[] numberArray = exactNumber.split(Pattern.quote(defaultDelimiter));
 			for(int i =0;i<numberArray.length;i++) {
-				sum += Integer.valueOf(numberArray[i]);
+				int parsedNumber = Integer.valueOf(numberArray[i]);
+				checkForNegativeNumber(parsedNumber);
+				sum += parsedNumber;
 			}
 		}
 		
@@ -57,6 +67,11 @@ public class StringCalculator {
 			}
 		}
 		return null;
+	}
+	
+	private void checkForNegativeNumber(int number) throws Exception {
+		if(number<0)
+			throw new Exception("negatives not allowed "+number);
 	}
 
 }
