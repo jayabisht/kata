@@ -53,7 +53,7 @@ class StringCalculatorTest {
 	void testNegativeNumberException() {
 		Throwable exception1 = assertThrows(
 	            Exception.class, () -> {
-	            	calculator.Add("1,2\n-10,-8");
+	            	calculator.Add("1,2\n-10,8");
 	            }
 	    );
 		
@@ -65,6 +65,24 @@ class StringCalculatorTest {
 	 
 	    assertEquals("negatives not allowed -10", exception1.getMessage());
 	    assertEquals("negatives not allowed -100", exception2.getMessage());
+	}
+	
+	@Test
+	void testMultipleNegativeNumberException() {
+		Throwable exception1 = assertThrows(
+	            Exception.class, () -> {
+	            	calculator.Add("1,2\n-10,-8");
+	            }
+	    );
+		
+		Throwable exception2 = assertThrows(
+	            Exception.class, () -> {
+	            	calculator.Add("//;\n-100;-9;8;-78");
+	            }
+	    );
+	 
+	    assertEquals("negatives not allowed -10,-8", exception1.getMessage());
+	    assertEquals("negatives not allowed -100,-9,-78", exception2.getMessage());
 	}
 
 }

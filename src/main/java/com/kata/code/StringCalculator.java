@@ -16,16 +16,14 @@ public class StringCalculator {
 		if(defaultDelimiter == null) {
 		
 			if(!numbers.contains(",") && !numbers.contains("\n")) {
-				int parsedNumber = Integer.valueOf(numbers);
-				checkForNegativeNumber(parsedNumber);
-				return parsedNumber;
+				checkForNegativeNumbers(new String[] {numbers});
+				return Integer.valueOf(numbers);
 			}
 			
 			String[] numberArray = numbers.split(",|\n");
+			checkForNegativeNumbers(numberArray);
 			for(int i =0;i<numberArray.length;i++) {
-				int parsedNumber = Integer.valueOf(numberArray[i]);
-				checkForNegativeNumber(parsedNumber);
-				sum += parsedNumber;
+				sum += Integer.valueOf(numberArray[i]);
 			}
 		}
 		else {
@@ -35,16 +33,14 @@ public class StringCalculator {
 				return 0;
 			
 			if(!exactNumber.contains(defaultDelimiter)) {
-				int parsedNumber = Integer.valueOf(exactNumber);
-				checkForNegativeNumber(parsedNumber);
-				return parsedNumber;
+				checkForNegativeNumbers(new String[] {exactNumber});
+				return Integer.valueOf(exactNumber);
 			}
 			
 			String[] numberArray = exactNumber.split(Pattern.quote(defaultDelimiter));
+			checkForNegativeNumbers(numberArray);
 			for(int i =0;i<numberArray.length;i++) {
-				int parsedNumber = Integer.valueOf(numberArray[i]);
-				checkForNegativeNumber(parsedNumber);
-				sum += parsedNumber;
+				sum += Integer.valueOf(numberArray[i]);;
 			}
 		}
 		
@@ -69,9 +65,16 @@ public class StringCalculator {
 		return null;
 	}
 	
-	private void checkForNegativeNumber(int number) throws Exception {
-		if(number<0)
-			throw new Exception("negatives not allowed "+number);
+	private void checkForNegativeNumbers(String numberArray[]) throws Exception {
+		String negativeNumbers = "";
+		for(String number : numberArray) {
+			int parsedNumber = Integer.valueOf(number);
+			if(parsedNumber<0)
+				negativeNumbers += parsedNumber+",";
+				
+		}
+		if(!negativeNumbers.equals(""))
+			throw new Exception("negatives not allowed "+negativeNumbers.substring(0, negativeNumbers.length()-1));
 	}
 
 }
