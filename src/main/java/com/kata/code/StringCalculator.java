@@ -6,6 +6,7 @@ import java.util.regex.Pattern;
 public class StringCalculator {
 	
 	public static final int MAX_NUMBER = 1000;
+	public static final String DELIMITER_FORMAT = "//\\[?(.*?)\\]?\n";
 
 	public Integer Add(String numbers) throws Exception {
 		
@@ -33,7 +34,7 @@ public class StringCalculator {
 			}
 		}
 		else {
-			String exactNumber = numbers.replaceFirst("//(.*?)\n", "");
+			String exactNumber = numbers.replaceFirst(DELIMITER_FORMAT, "");
 			
 			if(exactNumber.equals(""))
 				return 0;
@@ -66,7 +67,7 @@ public class StringCalculator {
 	 */
 	private String getDefaultDelimiter(String numbers) {
 		if(numbers.startsWith("//")) {
-			Pattern pattern = Pattern.compile("//(.*?)\n");
+			Pattern pattern = Pattern.compile(DELIMITER_FORMAT);
 			Matcher matcher = pattern.matcher(numbers);
 			while (matcher.find()) {
 			    return matcher.group(1);

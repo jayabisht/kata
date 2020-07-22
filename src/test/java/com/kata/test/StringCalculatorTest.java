@@ -41,7 +41,7 @@ class StringCalculatorTest {
 	}
 	
 	@Test
-	void testDynamicDelimiters() throws Exception {
+	void testDynamicDelimiter() throws Exception {
 		assertEquals(0,calculator.Add("//;\n"));
 		assertEquals(1,calculator.Add("//;\n1"));
 		assertEquals(3,calculator.Add("//;\n1;2"));
@@ -91,6 +91,15 @@ class StringCalculatorTest {
 		assertEquals(1,calculator.Add("//;\n1;101010"));
 		assertEquals(20,calculator.Add("//>\n1>8>10>1>7000"));
 		assertEquals(167,calculator.Add("//++\n2010++89090++10++1++7++10++40++99"));
+	}
+	
+	@Test
+	void testMultipleLengthDelimiter() throws Exception {
+		assertEquals(0,calculator.Add("//[;]\n"));
+		assertEquals(1,calculator.Add("//[---]\n1"));
+		assertEquals(3,calculator.Add("//[.....]\n1.....2"));
+		assertEquals(27,calculator.Add("//[>>>]\n1>>>8>>>10>>>1>>>7"));
+		assertEquals(176,calculator.Add("//[++]\n1++8++10++1++7++10++40++99"));
 	}
 
 }
