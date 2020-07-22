@@ -4,6 +4,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class StringCalculator {
+	
+	public static final int MAX_NUMBER = 1000;
 
 	public Integer Add(String numbers) throws Exception {
 		
@@ -17,12 +19,16 @@ public class StringCalculator {
 		
 			if(!numbers.contains(",") && !numbers.contains("\n")) {
 				checkForNegativeNumbers(new String[] {numbers});
+				if(Integer.valueOf(numbers)>MAX_NUMBER)
+					return 0;
 				return Integer.valueOf(numbers);
 			}
 			
 			String[] numberArray = numbers.split(",|\n");
 			checkForNegativeNumbers(numberArray);
 			for(int i =0;i<numberArray.length;i++) {
+				if(Integer.valueOf(numberArray[i])>MAX_NUMBER)
+					continue;
 				sum += Integer.valueOf(numberArray[i]);
 			}
 		}
@@ -34,12 +40,16 @@ public class StringCalculator {
 			
 			if(!exactNumber.contains(defaultDelimiter)) {
 				checkForNegativeNumbers(new String[] {exactNumber});
+				if(Integer.valueOf(exactNumber)>MAX_NUMBER)
+					return 0;
 				return Integer.valueOf(exactNumber);
 			}
 			
 			String[] numberArray = exactNumber.split(Pattern.quote(defaultDelimiter));
 			checkForNegativeNumbers(numberArray);
 			for(int i =0;i<numberArray.length;i++) {
+				if(Integer.valueOf(numberArray[i])>MAX_NUMBER)
+					continue;
 				sum += Integer.valueOf(numberArray[i]);;
 			}
 		}

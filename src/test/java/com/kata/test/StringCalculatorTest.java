@@ -84,5 +84,13 @@ class StringCalculatorTest {
 	    assertEquals("negatives not allowed -10,-8", exception1.getMessage());
 	    assertEquals("negatives not allowed -100,-9,-78", exception2.getMessage());
 	}
+	
+	@Test
+	void testNumberBiggerThanThousand() throws Exception {
+		assertEquals(0,calculator.Add("//;\n1002"));
+		assertEquals(1,calculator.Add("//;\n1;101010"));
+		assertEquals(20,calculator.Add("//>\n1>8>10>1>7000"));
+		assertEquals(167,calculator.Add("//++\n2010++89090++10++1++7++10++40++99"));
+	}
 
 }
