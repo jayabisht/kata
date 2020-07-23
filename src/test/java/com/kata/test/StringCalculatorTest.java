@@ -101,5 +101,14 @@ class StringCalculatorTest {
 		assertEquals(27,calculator.Add("//[>>>]\n1>>>8>>>10>>>1>>>7"));
 		assertEquals(176,calculator.Add("//[++]\n1++8++10++1++7++10++40++99"));
 	}
+	
+	@Test
+	void testMultipleDelimiters() throws Exception {
+		assertEquals(0,calculator.Add("//[;][&]\n"));
+		assertEquals(1,calculator.Add("//[-]\n1"));
+		assertEquals(3,calculator.Add("//[*]\n1*2"));
+		assertEquals(27,calculator.Add("//[_][;][%]\n1_8%10;1_7"));
+		assertEquals(176,calculator.Add("//[@][&]\n1@8@10&1@7&10&40&99"));
+	}
 
 }
