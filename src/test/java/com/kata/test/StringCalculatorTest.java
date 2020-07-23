@@ -3,6 +3,7 @@ package com.kata.test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Test;
 
 import com.kata.code.StringCalculator;
@@ -118,6 +119,11 @@ class StringCalculatorTest {
 		assertEquals(3,calculator.Add("//[****]\n1****2"));
 		assertEquals(27,calculator.Add("//[__][;][%%%%]\n1__8%%%%10;1__7"));
 		assertEquals(176,calculator.Add("//[@@][&&&]\n1@@8@@10&&&1@@7&&&10&&&40&&&99"));
+	}
+	
+	@AfterAll
+	static void testAddMethodInvocationCount() {
+		assertEquals(37, StringCalculator.GetCalledCount());
 	}
 
 }

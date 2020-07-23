@@ -11,8 +11,11 @@ public class StringCalculator {
 	public final int MAX_NUMBER = 1000;
 	public final String DELIMITER_FORMAT = "\\[?([^\\]]*)\\]?";			
 	public final String[] DEFAULT_DELIMITERS = {",","\n"};
+	public static int addCount = 0;
 
 	public Integer Add(String numbers) throws Exception {
+		
+		addCount++;
 		
 		// Return 0 for empty string
 		if(numbers.equals(""))
@@ -96,6 +99,10 @@ public class StringCalculator {
 		}
 		if(!negativeNumbers.equals(""))
 			throw new Exception("negatives not allowed " + negativeNumbers.substring(0, negativeNumbers.length()-1));
+	}
+
+	public static int GetCalledCount() {	
+		return addCount;
 	}
 
 }
